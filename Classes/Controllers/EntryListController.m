@@ -28,6 +28,16 @@
 
     tableView = [[tableViewController tableView] retain];
     [tableView setFrame:[[self view] bounds]];
+
+    // If on iOS 7 and not first controller on tab bar, have to adjust content inset of
+    // table view for some strange reason
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") &&
+            self.tabBarController.viewControllers.firstObject &&
+            self.tabBarController.viewControllers.firstObject != self) {
+        tableView.contentInset = UIEdgeInsetsMake(64, 0, 49, 0);
+        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, 49, 0);
+    }
+    
     [tableView setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
     [tableView setDelegate:self];
     [tableView setDataSource:self];

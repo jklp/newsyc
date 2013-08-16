@@ -38,6 +38,12 @@
     [super loadView];
     
     tableView = [[OrangeTableView alloc] initWithFrame:[[self view] bounds]];
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        tableView.contentInset = UIEdgeInsetsMake(64, 0, 39, 0);
+        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, 49, 0);
+    }
+    
     [tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     [tableView setDelegate:self];
     [tableView setDataSource:self];
