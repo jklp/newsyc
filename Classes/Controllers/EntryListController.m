@@ -28,11 +28,6 @@
 
     tableView = [[tableViewController tableView] retain];
     [tableView setFrame:[[self view] bounds]];
-
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
-        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 49, 0);
-    }
     
     [tableView setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
     [tableView setDelegate:self];

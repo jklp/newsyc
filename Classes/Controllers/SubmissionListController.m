@@ -15,6 +15,13 @@
 
 @implementation SubmissionListController
 
+- (void)viewDidLoad {
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
+        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 49, 0);
+    }
+}
+
 + (Class)cellClass {
     return [SubmissionTableCell class];
 }
