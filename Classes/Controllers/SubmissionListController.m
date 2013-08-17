@@ -16,7 +16,7 @@
 @implementation SubmissionListController
 
 - (void)viewDidLoad {
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") && self.tabBarController) {
         tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
         tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 49, 0);
     }
