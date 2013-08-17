@@ -143,9 +143,14 @@
     [[self selectedViewController] setWantsFullScreenLayout:YES];
 
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"disable-orange"]) {
-      [[self tabBar] setSelectedImageTintColor:[UIColor mainOrangeColor]];
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+            self.tabBar.tintColor = [UIColor mainOrangeColor];
+        } else {
+            [[self tabBar] setSelectedImageTintColor:[UIColor mainOrangeColor]];
+        }
+        
     } else {
-      [[self tabBar] setSelectedImageTintColor:nil];
+        [[self tabBar] setSelectedImageTintColor:nil];
     }
 }
 

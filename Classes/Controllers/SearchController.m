@@ -48,8 +48,8 @@
     tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [coloredView bounds].size.height, [[self view] bounds].size.width, [[self view] bounds].size.height - [coloredView bounds].size.height)];
 
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-        tableView.contentInset = UIEdgeInsetsMake(20, 0, 49, 0);
-        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 49, 0);
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
+        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 49, 0);
     }
     [tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     [tableView setDelegate:self];
@@ -154,12 +154,7 @@
         
 		if ([entries count] != 0) {
 			[emptyResultsView setHidden:YES];
-            
-            if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-                [tableView setContentOffset:CGPointMake(0, -20) animated:NO];
-            } else {
-                [tableView setContentOffset:CGPointZero animated:NO];
-            }
+            [tableView setContentOffset:CGPointZero animated:NO];
 		}
 
         [tableView reloadData];

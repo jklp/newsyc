@@ -17,6 +17,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(enteredForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
 }
@@ -41,11 +45,20 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"disable-orange"]) {
-        [[self navigationBar] setTintColor:[UIColor mainOrangeColor]];
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        self.navigationBar.tintColor = [UIColor whiteColor];
+        
     } else {
-        [[self navigationBar] setTintColor:nil];
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"disable-orange"]) {
+            [[self navigationBar] setTintColor:[UIColor mainOrangeColor]];
+        } else {
+            [[self navigationBar] setTintColor:nil];
+        }
     }
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 // Why this isn't delegated by UIKit to the top view controller, I have no clue.
