@@ -146,10 +146,15 @@
     [super viewWillAppear:animated];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"disable-orange"]) {
+        if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
             [entryActionsView setStyle:kEntryActionsViewStyleOrange];
+            
         } else {
-            [entryActionsView setStyle:kEntryActionsViewStyleDefault];
+            if (![[NSUserDefaults standardUserDefaults] boolForKey:@"disable-orange"]) {
+                [entryActionsView setStyle:kEntryActionsViewStyleOrange];
+            } else {
+                [entryActionsView setStyle:kEntryActionsViewStyleDefault];
+            }
         }
     } else if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         if (![[NSUserDefaults standardUserDefaults] boolForKey:@"disable-orange"]) {

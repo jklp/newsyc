@@ -28,6 +28,7 @@
 
 #import "UIApplication+ActivityIndicator.h"
 #import "UINavigationItem+MultipleItems.h"
+#import "UIColor+Orange.h"
 
 @implementation UINavigationController (AppDelegate)
 
@@ -137,8 +138,13 @@
     // Apperance proxies
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
         if (![[NSUserDefaults standardUserDefaults] boolForKey:@"disable-orange"]) {
-            [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
+            [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar-orange.png"] forBarMetrics:UIBarMetricsDefault];
             [[UINavigationBar appearance] setTitleTextAttributes:@{ UITextAttributeTextColor : [UIColor whiteColor] }];
+        } else {
+            // Have to set the background image of the navbar as if not set on iOS7, TableView
+            // goes "under" the navbar
+            [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
+            [[UINavigationBar appearance] setTitleTextAttributes:@{ UITextAttributeTextColor : [UIColor mainOrangeColor] }];
         }
     }
 

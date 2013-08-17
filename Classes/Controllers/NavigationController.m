@@ -46,7 +46,11 @@
     [super viewWillAppear:animated];
     
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-        self.navigationBar.tintColor = [UIColor whiteColor];
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"disable-orange"]) {
+            self.navigationBar.tintColor = [UIColor whiteColor];
+        } else {
+            self.navigationBar.tintColor = [UIColor mainOrangeColor];
+        }
         
     } else {
         if (![[NSUserDefaults standardUserDefaults] boolForKey:@"disable-orange"]) {
@@ -58,7 +62,14 @@
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"disable-orange"]) {
+            return UIStatusBarStyleLightContent;
+        }
+        return UIStatusBarStyleDefault;
+    }
+    
+    return UIStatusBarStyleBlackOpaque;
 }
 
 // Why this isn't delegated by UIKit to the top view controller, I have no clue.
