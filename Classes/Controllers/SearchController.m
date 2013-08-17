@@ -45,12 +45,18 @@
     [facetControl setFrame:CGRectMake(([coloredView bounds].size.height - [facetControl bounds].size.height) / 2, ([coloredView bounds].size.height - [facetControl bounds].size.height) / 2, [coloredView bounds].size.width - ((([coloredView bounds].size.height - [facetControl bounds].size.height) / 2) * 2), [facetControl bounds].size.height)];
     [coloredView addSubview:facetControl];
     
-    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [coloredView bounds].size.height, [[self view] bounds].size.width, [[self view] bounds].size.height - [coloredView bounds].size.height)];
-
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
         tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
         tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 49, 0);
+        
+    } else {
+        tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,
+                                                                  [coloredView bounds].size.height,
+                                                                  [[self view] bounds].size.width,
+                                                                  [[self view] bounds].size.height - [coloredView bounds].size.height)];
     }
+    
     [tableView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     [tableView setDelegate:self];
     [tableView setDataSource:self];
